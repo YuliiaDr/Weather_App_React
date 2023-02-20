@@ -1,0 +1,41 @@
+.Nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 30px 20px;
+  text-align: center;
+}
+.Nav .SearchForm {
+  padding-top: 12px;
+}
+.Nav .SearchInput {
+  width: 180px;
+  font-size: 14px;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
+}
+.btn {
+  width: 50px;
+  box-shadow: 5px 5px 10px rgb(0 0 0 / 30%);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
+  transition: all 2.5ms ease-in-out;
+}
+.Nav .CurrentLocationBtn {
+  width: 70px;
+  height: 45px;
+  color: white;
+  margin-top: 11px;
+  margin-left: 10px;
+  margin-right: 10px;
+  box-shadow: 5px 5px 10px rgb(0 0 0 / 30%);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
+  transition: all 2.5ms ease-in-out;
+}
+.Nav .CurrentLocationBtn:hover,
+.Nav .CurrentLocationBtn:focus {
+  color: black;
+}

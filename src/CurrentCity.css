@@ -1,0 +1,37 @@
+.CurrentCity {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 15px;
+}
+.CurrentCity .CurrentLocationInfo {
+  width: 85px;
+  height: 45px;
+  color: white;
+  margin-top: 11px;
+  margin-left: 10px;
+  box-shadow: 5px 5px 10px rgb(0 0 0 / 30%);
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 10px;
+  transition: all 2.5ms ease-in-out;
+}
+.CurrentCity .City {
+  margin-bottom: 0;
+}
+.CurrentCity .CurrentTemp {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+.CurrentCity .CurrentTempNow {
+  font-size: 32px;
+}
+.CurrentCity p:last-of-type {
+  margin-bottom: 0px;
+  text-align: center;
+}
+.CurrentCity .Active {
+  color: white;
+}
+.CurrentCity .Units {
+  position: relative;
+  top: -10px;
+}
