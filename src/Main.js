@@ -7,11 +7,25 @@ import WeatherForecast from "./WeatherForecast";
 import "./Main.css";
 
 export default function Main({weather}) {
+  // console.log(weather);
+  if (!weather) {
+    return (<main>
+    <section className="CurrentForecast">
+      <div className="Current grid">
+        <CurrentCity weather={weather}/>
+        <CurrentImage />
+        <CurrentCityExtra />
+      </div>
+    </section>
+    <WeatherForecast />
+  </main>);
+  }
+
   return (
     <main>
       <section className="CurrentForecast">
         <div className="Current grid">
-          <CurrentCity />
+          <CurrentCity weather={weather}/>
           <CurrentImage />
           <CurrentCityExtra />
         </div>
