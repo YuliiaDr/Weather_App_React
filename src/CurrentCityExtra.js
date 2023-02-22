@@ -3,11 +3,14 @@ import "./CurrentCityExtra.css";
 import CurrentWeatherConditions from "./CurrentWeatherConditions";
 import Blockquote from "./Blockquote";
 
-export default function CurrentCityExtra(weather) {
+export default function CurrentCityExtra({weather}) {
+  if (!weather) {
+    return (<div>Loading...</div>);
+  }
   return (
     <div className="CurrentCityExtra g-col-4">
-      <CurrentWeatherConditions />
-      <Blockquote />
+      <CurrentWeatherConditions weather={weather}/>
+      <Blockquote weather={weather}/>
     </div>
   );
 }

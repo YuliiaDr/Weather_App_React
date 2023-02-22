@@ -20,6 +20,7 @@ body {
   color: white;
   font-family: "Helvetica", sans-serif;
   height: 100vh;
+  padding: 40px;
 }
 body.day {
   background: linear-gradient(

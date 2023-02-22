@@ -13,8 +13,8 @@ export default function Main({weather}) {
     <section className="CurrentForecast">
       <div className="Current grid">
         <CurrentCity weather={weather}/>
-        <CurrentImage />
-        <CurrentCityExtra />
+        <CurrentImage weather={weather}/>
+        <CurrentCityExtra weather={weather}/>
       </div>
     </section>
     <WeatherForecast />
@@ -26,8 +26,8 @@ export default function Main({weather}) {
       <section className="CurrentForecast">
         <div className="Current grid">
           <CurrentCity weather={weather}/>
-          <CurrentImage />
-          <CurrentCityExtra />
+          <CurrentImage weather={weather}/>
+          <CurrentCityExtra weather={weather}/>
         </div>
       </section>
       <WeatherForecast />

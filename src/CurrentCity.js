@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./CurrentCity.css";
 
 export default function CurrentCity({weather}) {
-  console.log(weather);
+  console.log({weather});
   if (!weather) {
     return (<div>Loading...</div>);
   }
@@ -26,7 +26,7 @@ export default function CurrentCity({weather}) {
           </a>
         </span>
       </p>
-      <p id="feels-like">Feels like:</p>
+      <p id="feels-like">Feels like: {weather.feels_like}°</p>
     </div>
   );
 }

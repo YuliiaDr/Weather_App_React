@@ -7,10 +7,24 @@ import "./App.css";
 
 export default function App() {
   const [weather, setWeather] = useState(null);
+  const [location, setLocation] = useState(null);
 
   useEffect(() => {
     searchCity("Kyiv"); // make an API call for the default city when the component mounts
   }, []);
+
+  function setBackgroundColor(response) {
+    const iconCondition = response.data.condition.icon;
+    const background = document.querySelector("#background");
+   
+    if (iconCondition.includes("day")) {
+      background.classList.add("day");
+      background.classList.remove("night");
+    } else {
+      background.classList.add("night");
+      background.classList.remove("day");
+    }
+  }
 
   function updateWeather(response) {
     setWeather({
@@ -20,7 +34,10 @@ export default function App() {
       humidity: response.data.temperature.humidity,
       wind: Math.round(response.data.wind.speed),
       icon: response.data.condition.icon_url,
+      icon_descr: response.data.condition.icon,
+      feels_like: Math.round(response.data.temperature.feels_like),
     });
+    setBackgroundColor(response);
   }
 
   function searchCity(query) {
@@ -36,7 +53,7 @@ export default function App() {
   }
 
   return (
-    <div className="App">
+    <div className = {`background ${weather && weather.icon.includes("day") ? "day" : "night"}`}>
       <Header updateWeather={updateWeather} searchCity={searchCity} />
       <Main weather={weather} />
       <Footer />
