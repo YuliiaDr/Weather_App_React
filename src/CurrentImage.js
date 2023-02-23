@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import "./CurrentImage.css";
 
 export default function CurrentImage({weather}) {
+  console.log({weather});
   // let icon = useId();
   if (!weather) {
     return (<div>Loading...</div>);
