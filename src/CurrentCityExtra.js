@@ -7,9 +7,9 @@ import Blockquote from "./Blockquote";
 export default function CurrentCityExtra({weather, units, onUnitsChange}) {
   if (!weather) {
     return (<Triangle
-      height="80"
-      width="80"
-      color="#4fa94d"
+      height="100"
+      width="100"
+      color="#26C9FC"
       ariaLabel="triangle-loading"
       wrapperStyle={{}}
       wrapperClassName=""
@@ -17,7 +17,7 @@ export default function CurrentCityExtra({weather, units, onUnitsChange}) {
     />);
   }
   return (
-    <div className="CurrentCityExtra g-col-4">
+    <div className="CurrentCityExtra">
       <CurrentWeatherConditions weather={weather} units={units} onUnitsChange={onUnitsChange}/>
       <Blockquote weather={weather}/>
     </div>

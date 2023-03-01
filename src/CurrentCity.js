@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Triangle } from "react-loader-spinner";
 import "./CurrentCity.css";
 
 export default function CurrentCity({ weather, units, onUnitsChange }) {
@@ -28,25 +29,30 @@ export default function CurrentCity({ weather, units, onUnitsChange }) {
     }
   }
 
-  if (temperature === null || feelsLikeTemperature === null) {
-    return <div>Loading...</div>;
+  if (temperature === null || feelsLikeTemperature === null || weather.city === undefined) {
+    return (<Triangle
+      height="100"
+      width="100"
+      color="#26C9FC"
+      ariaLabel="triangle-loading"
+      wrapperStyle={{}}
+      wrapperClassName=""
+      visible={true}
+    />);
   }
 
-  const unitsSymbol = units === "imperial" ? "F" : "C";
-
   return (
-    <div className="CurrentCity g-col-6">
+    <div className="CurrentCity">
       <h2 className="City">
-        <span id="search-city">{weather.city}</span>
+        <span>{weather.city}</span>
       </h2>
       <p className="CurrentTemp">
-         <span className="CurrentTempNow float-left" id="current-temp-now">
+         <span className="CurrentTempNow float-left">
           {temperature}{" "}
         </span>
         <span className="Units">
           <a
             href="/"
-            id="CelsiusLink"
             className={units === "metric" ? "Active" : ""}
             onClick={(e) => handleUnitsClick(e, false)}
           >
@@ -55,7 +61,6 @@ export default function CurrentCity({ weather, units, onUnitsChange }) {
           |{" "}
           <a
             href="/"
-            id="FahrenheitLink"
             className={units === "imperial" ? "Active" : ""}
             onClick={(e) => handleUnitsClick(e, true)}
           >
@@ -63,7 +68,7 @@ export default function CurrentCity({ weather, units, onUnitsChange }) {
           </a>
         </span>
       </p>
-      <p id="feels-like">Feels like: {feelsLikeTemperature} {" "} °{feelsLikeUnits}</p>
+      <p>Feels like: {feelsLikeTemperature} {" "} °{feelsLikeUnits}</p>
     </div>
   );
 }

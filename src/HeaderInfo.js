@@ -1,8 +1,8 @@
 import React from "react";
+import { Triangle } from "react-loader-spinner";
 import "./HeaderInfo.css";
 
 export default function HeaderInfo(props) {
-  console.log(props);
   const { time } = props;
 
   const formatDate = (time) => {
@@ -37,6 +37,21 @@ export default function HeaderInfo(props) {
     const timeString = hours + ":" + minutes;
     return timeString;
   };
+
+  if ( time === null) {
+    return (
+      <div className="HeaderInfo">
+        <h1>Weather Forecast</h1>
+        <Triangle
+          height="100"
+          width="100"
+          color="#26C9FC"
+          ariaLabel="triangle-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}/>
+        </div>);
+  }
 
   return (
     <div className="HeaderInfo">

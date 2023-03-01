@@ -11,19 +11,17 @@ export default function Main({weather, units, onUnitsChange}) {
   if (!weather) {
     return (<main>
     <section className="CurrentForecast">
-      <div className="Current grid">
-        <CurrentCity 
-          weather={weather}
-          units={units}
-          onUnitsChange={onUnitsChange}
-        />
-        <CurrentImage weather={weather}/>
-        <CurrentCityExtra
-          weather={weather}
-          units={units}
-          onUnitsChange={onUnitsChange}
-        />
-      </div>
+      <CurrentCity 
+        weather={weather}
+        units={units}
+        onUnitsChange={onUnitsChange}
+      />
+      <CurrentImage weather={weather}/>
+      <CurrentCityExtra
+        weather={weather}
+        units={units}
+        onUnitsChange={onUnitsChange}
+      />
     </section>
     <WeatherForecast />
   </main>);
@@ -32,7 +30,6 @@ export default function Main({weather, units, onUnitsChange}) {
   return (
     <main>
       <section className="CurrentForecast">
-        <div className="Current grid">
         <CurrentCity 
           weather={weather}
           units={units}
@@ -44,7 +41,6 @@ export default function Main({weather, units, onUnitsChange}) {
           units={units}
           onUnitsChange={onUnitsChange}
         />
-        </div>
       </section>
       <WeatherForecast />
     </main>

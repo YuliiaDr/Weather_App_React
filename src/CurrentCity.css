@@ -4,7 +4,7 @@
   padding-top: 15px;
 }
 .CurrentCity .CurrentLocationInfo {
-  width: 85px;
+  /* min-width: 30%; */
   height: 45px;
   color: white;
   margin-top: 11px;

@@ -4,13 +4,16 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 
-import "./App.css";
+import "./index.css"
 
 export default function App() {
   const [weather, setWeather] = useState(null);
   const [location, setLocation] = useState(null);
   const [units, setUnits] = useState("metric");
   const [timestamp, setTimestamp] = useState(null);
+  const [isDaytime, setIsDaytime] = useState(true);
+  
+  let apiKey = "9422f0o3bf27abc2b46fcabt0cf2c5f3";
 
   function handleUnitsChange(newUnits) {
     setUnits(newUnits);
@@ -32,25 +35,23 @@ export default function App() {
     }
   }
 
-
-  let apiKey = "9422f0o3bf27abc2b46fcabt0cf2c5f3";
-
   function setBackgroundColor(response) {
     const iconCondition = response.data.condition.icon;
-    const background = document.querySelector("#background");
     if (iconCondition.includes("day")) {
-      background.classList.add("day");
-      background.classList.remove("night");
+      setIsDaytime(true);
     } else {
-      background.classList.add("night");
-      background.classList.remove("day");
+      setIsDaytime(false);
     }
   }
 
+  useEffect(() => {
+    document.body.className = isDaytime ? "day" : "night";
+  }, [isDaytime]);
+
   function updateWeather(response) {
-    // if (!timestamp) {
+    if (!timestamp) {
       setTimestamp(response.data.time);
-    // }
+    }
     setWeather({
       city: response.data.city,
       temperature: Math.round(response.data.temperature.current),
@@ -73,6 +74,34 @@ export default function App() {
     });
   }
 
+  // function getCurrentLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const { latitude, longitude } = position.coords;
+  //         let url = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=${units}&t=${new Date().getTime()}`;
+  //         axios.get(url).then((response) => {
+  //           setLocation({
+  //             city: response.data.city,
+  //             country: response.data.country,
+  //             time: response.data.time,
+  //             coordinates: {
+  //               latitude: response.data.location?.latitude,
+  //               longitude: response.data.location?.longitude,
+  //             },
+  //           });
+  //           updateWeather(response);
+  //         });
+  //       },
+  //       () => {
+  //         console.error("Geolocation is not supported by this browser.");
+  //       }
+  //     );
+  //   } else {
+  //     console.error("Geolocation is not supported by this browser.");
+  //   }
+  // }
+  
   function getCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -80,35 +109,36 @@ export default function App() {
           const { latitude, longitude } = position.coords;
           let url = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=${units}&t=${new Date().getTime()}`;
           axios.get(url).then((response) => {
+            const location = response.data.location;
             setLocation({
               city: response.data.city,
               country: response.data.country,
               time: response.data.time,
               coordinates: {
-                latitude: response.data.location?.latitude,
-                longitude: response.data.location?.longitude,
+                latitude: location ? location.latitude : null,
+                longitude: location ? location.longitude : null,
               },
             });
             updateWeather(response);
           });
         },
         () => {
-          console.error("Geolocation is not supported by this browser.");
+          alert("Geolocation is not supported by this browser. Please, allow this function.");
+          searchCity("Kyiv") ;
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
   }
-  
   useEffect(() => {
     getCurrentLocation();
   }, []);
 
   return (
-    <div className={`background ${weather && weather.icon && weather.icon.includes("day") ? "day" : "night"}`} id="background">
+    <div>
       <Header
-         time={timestamp ? timestamp : (weather && weather.time)} // use timestamp if available
+        time={timestamp ? timestamp : (weather && weather.time)} // use timestamp if available
         searchCity={searchCity}
         updateWeather={updateWeather}
         getCurrentLocation={getCurrentLocation}
@@ -117,7 +147,7 @@ export default function App() {
         weather={weather}
         units={units}
         onUnitsChange={handleUnitsChange} 
-      //  location={location} 
+        location={location} 
       />
       <Footer />
     </div>

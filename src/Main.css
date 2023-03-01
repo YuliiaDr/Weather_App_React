@@ -1,19 +1,21 @@
-.CurrentForecast .Current {
+.CurrentForecast{
   max-width: 1000px;
+  /* width: 95%; */
   height: 100%;
   border: 2px solid rgba(0, 0, 0, 0.125);
   border-radius: 10px;
   box-shadow: 10px 10px 15px rgb(0 0 0 / 30%);
   padding: 15px;
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   margin: 30px auto;
   overflow: hidden;
   transition: all 0.5s ease-in-out;
 }
 
-.CurrentForecast .Current:hover,
-.CurrentForecast .Current:focus {
+.CurrentForecast:hover,
+.CurrentForecast:focus {
   cursor: pointer;
   transform: scale(1.1);
 }

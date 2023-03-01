@@ -1,13 +1,22 @@
 import React from "react";
-// import { useId } from "react";
+import { Triangle } from "react-loader-spinner";
 import "./CurrentImage.css";
 
 export default function CurrentImage({weather}) {
   if (!weather) {
-    return (<div>Loading...</div>);
+    return ((<Triangle
+      height="100"
+      width="100"
+      color="#26C9FC"
+      ariaLabel="triangle-loading"
+      wrapperStyle={{}}
+      wrapperClassName=""
+      visible={true}
+    />
+    ))
   }
   return (
-    <div className="CurrentImage g-col-2">
+    <div className="CurrentImage">
       <img
         style={{
           width: 200
