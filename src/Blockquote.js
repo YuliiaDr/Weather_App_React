@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Blockquote.css";
-import { useId } from "react";
 
 export default function Blockquote({ weather }) {
   const [quote, setQuote] = useState("");

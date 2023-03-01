@@ -6,15 +6,23 @@ import WeatherForecast from "./WeatherForecast";
 
 import "./Main.css";
 
-export default function Main({weather}) {
+export default function Main({weather, units, onUnitsChange}) {
   // console.log(weather);
   if (!weather) {
     return (<main>
     <section className="CurrentForecast">
       <div className="Current grid">
-        <CurrentCity weather={weather}/>
+        <CurrentCity 
+          weather={weather}
+          units={units}
+          onUnitsChange={onUnitsChange}
+        />
         <CurrentImage weather={weather}/>
-        <CurrentCityExtra weather={weather}/>
+        <CurrentCityExtra
+          weather={weather}
+          units={units}
+          onUnitsChange={onUnitsChange}
+        />
       </div>
     </section>
     <WeatherForecast />
@@ -25,9 +33,17 @@ export default function Main({weather}) {
     <main>
       <section className="CurrentForecast">
         <div className="Current grid">
-          <CurrentCity weather={weather}/>
-          <CurrentImage weather={weather}/>
-          <CurrentCityExtra weather={weather}/>
+        <CurrentCity 
+          weather={weather}
+          units={units}
+          onUnitsChange={onUnitsChange}
+        />
+        <CurrentImage weather={weather}/>
+        <CurrentCityExtra
+          weather={weather}
+          units={units}
+          onUnitsChange={onUnitsChange}
+        />
         </div>
       </section>
       <WeatherForecast />

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./CurrentCity.css";
 
-export default function CurrentCity({ weather }) {
+export default function CurrentCity({ weather, units, onUnitsChange }) {
+  console.log(weather, units);
   const [temperature, setTemperature] = useState(null);
-  const [units, setUnits] = useState("metric");
   const [feelsLikeTemperature, setFeelsLikeTemperature] = useState(null);
   const [feelsLikeUnits, setFeelsLikeUnits] = useState("C");
 
@@ -14,31 +14,25 @@ export default function CurrentCity({ weather }) {
     }
   }, [weather]);
 
-  function celsiusToFahrenheit(e) {
+  function handleUnitsClick(e, isImperial) {
     e.preventDefault();
-    if (units !== "imperial") {
-      let fahrenheitTemp = Math.round((temperature * 9) / 5 + 32);
-      setTemperature(fahrenheitTemp);
-      setUnits("imperial");
-      let fahrenheitFeelsLikeTemp = Math.round((feelsLikeTemperature * 9) / 5 + 32);
-      setFeelsLikeTemperature(fahrenheitFeelsLikeTemp);
-      setFeelsLikeUnits("F");
+    if ((isImperial && units !== "imperial") || (!isImperial && units !== "metric")) {
+      const newUnits = isImperial ? "imperial" : "metric";
+      const newTemperature = isImperial ? Math.round((temperature * 9) / 5 + 32) : weather.temperature;
+      const newFeelsLikeTemperature = isImperial ? Math.round((feelsLikeTemperature * 9) / 5 + 32) : weather.feels_like;
+      const newFeelsLikeUnits = isImperial ? "F" : "C";
+      setTemperature(newTemperature);
+      setFeelsLikeTemperature(newFeelsLikeTemperature);
+      setFeelsLikeUnits(newFeelsLikeUnits);
+      onUnitsChange(newUnits);
     }
   }
 
-  function fahrenheitToCelsius(e) {
-    e.preventDefault();
-    if (units !== "metric") {
-      setTemperature(weather.temperature);
-      setUnits("metric");
-      setFeelsLikeTemperature(weather.feels_like);
-      setFeelsLikeUnits("C");
-    }
-  }
-
-  if (!weather || !temperature || !feelsLikeTemperature) {
+  if (temperature === null || feelsLikeTemperature === null) {
     return <div>Loading...</div>;
   }
+
+  const unitsSymbol = units === "imperial" ? "F" : "C";
 
   return (
     <div className="CurrentCity g-col-6">
@@ -46,7 +40,7 @@ export default function CurrentCity({ weather }) {
         <span id="search-city">{weather.city}</span>
       </h2>
       <p className="CurrentTemp">
-        <span className="CurrentTempNow float-left" id="current-temp-now">
+         <span className="CurrentTempNow float-left" id="current-temp-now">
           {temperature}{" "}
         </span>
         <span className="Units">
@@ -54,7 +48,7 @@ export default function CurrentCity({ weather }) {
             href="/"
             id="CelsiusLink"
             className={units === "metric" ? "Active" : ""}
-            onClick={fahrenheitToCelsius}
+            onClick={(e) => handleUnitsClick(e, false)}
           >
             °C
           </a>{" "}
@@ -63,7 +57,7 @@ export default function CurrentCity({ weather }) {
             href="/"
             id="FahrenheitLink"
             className={units === "imperial" ? "Active" : ""}
-            onClick={celsiusToFahrenheit}
+            onClick={(e) => handleUnitsClick(e, true)}
           >
             °F
           </a>

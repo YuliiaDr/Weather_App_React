@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./Nav.css";
 
 export default function Nav(props) {
@@ -17,32 +16,7 @@ export default function Nav(props) {
 
   function handleCurrentLocation(event) {
     event.preventDefault();
-    let apiKey = `9422f0o3bf27abc2b46fcabt0cf2c5f3`;
-    let units = "metric";
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-
-          axios
-            .get(
-              `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=${units}`
-            )
-            .then((response) => {
-              props.setCurrentWeather(response);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
+    props.getCurrentLocation();
   }
 
   return (

@@ -1,10 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 // import { useId } from "react";
 import "./CurrentImage.css";
 
 export default function CurrentImage({weather}) {
-  console.log({weather});
-  // let icon = useId();
   if (!weather) {
     return (<div>Loading...</div>);
   }
@@ -15,9 +13,7 @@ export default function CurrentImage({weather}) {
           width: 200
         }}
         src={weather.icon}
-        // src={require("./images/sun.png")}
         alt="Weather conditions"
-        // id={icon}
       />
     </div>
   );
