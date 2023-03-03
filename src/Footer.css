@@ -6,6 +6,11 @@
   margin-top: 20px;
   padding-top: 30px;
 }
+@media (max-width: 360px) {
+  .Signature{
+    font-size: 12px;
+  }  
+}
 .SignatureLink {
   color: #26b6d7;
 }

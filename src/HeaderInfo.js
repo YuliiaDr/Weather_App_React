@@ -1,10 +1,12 @@
 import React from "react";
 import { Triangle } from "react-loader-spinner";
+
 import "./HeaderInfo.css";
 
 export default function HeaderInfo(props) {
   const { time } = props;
 
+  // ---------------------------------------------------Setting Date
   const formatDate = (time) => {
     const months = [
       "January",
@@ -28,6 +30,7 @@ export default function HeaderInfo(props) {
     return dateString;
   };
 
+  // ---------------------------------------------------Setting Time
   const formatTime = (time) => {
     const date = new Date(time * 1000);
     let hours = date.getHours();
@@ -38,6 +41,7 @@ export default function HeaderInfo(props) {
     return timeString;
   };
 
+  // ---------------------------------------------------Return Part
   if ( time === null) {
     return (
       <div className="HeaderInfo">
@@ -52,7 +56,6 @@ export default function HeaderInfo(props) {
           visible={true}/>
         </div>);
   }
-
   return (
     <div className="HeaderInfo">
       <h1>Weather Forecast</h1>

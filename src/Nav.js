@@ -4,21 +4,23 @@ import "./Nav.css";
 export default function Nav(props) {
   const [query, setQuery] = useState("");
 
+// ---------------------------------------------------Call for City Search
   function handleCity(event) {
     setQuery(event.target.value);
   }
-
   function handleSubmit(event) {
     event.preventDefault();
     props.searchCity(query);
     setQuery("");
   }
 
+  // ---------------------------------------------------Call for Search of Current Location
   function handleCurrentLocation(event) {
     event.preventDefault();
     props.getCurrentLocation();
   }
 
+  // ---------------------------------------------------Return Part
   return (
     <div className="Nav">
       <form className="SearchForm" onSubmit={handleSubmit}>

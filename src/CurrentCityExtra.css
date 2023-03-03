@@ -1,3 +1,13 @@
 .CurrentCityExtra {
   margin: 0 auto;
 }
+@media (max-width: 843px) {
+  .CurrentCityExtra{
+    border-top: 1px solid white;
+  }
+}
+@media (max-width: 360px) {
+  .CurrentCityExtra{
+    margin: 0;
+  }
+}

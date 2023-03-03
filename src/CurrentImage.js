@@ -1,9 +1,10 @@
 import React from "react";
 import { Triangle } from "react-loader-spinner";
+
 import "./CurrentImage.css";
 
-export default function CurrentImage({weather}) {
-  if (!weather) {
+export default function CurrentImage(props) {
+  if (!props.weather) {
     return ((<Triangle
       height="100"
       width="100"
@@ -21,7 +22,7 @@ export default function CurrentImage({weather}) {
         style={{
           width: 200
         }}
-        src={weather.icon}
+        src={props.weather.icon}
         alt="Weather conditions"
       />
     </div>

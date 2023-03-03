@@ -1,16 +1,3 @@
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
 body {
   background-position: center center;
   -webkit-background-size: cover;
@@ -48,4 +35,38 @@ a:focus {
 ul {
   list-style: none;
   padding-left: 0;
+}
+/* Change the background color of the alert container */
+.Toastify__toast {
+  background-color: #513093;
+}
+
+/* Change the text color of the alert message */
+.Toastify__toast-body {
+  color: #ffffff;
+  /* color:#26c9fc; */
+}
+
+/* Change the font size of the alert message */
+.Toastify__toast-body {
+  font-size: 16px;
+}
+
+/* Add a border to the alert container */
+.Toastify__toast {
+  box-shadow: 5px 5px 10px rgb(255 255 255 / 30%);
+  border: 1px solid white;
+  border-radius: 10px;
+  transition: all 2.5ms ease-in-out;
+  margin: 10px auto;
+  padding: 30px 40px;
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+}
+@media (max-width: 360px) {
+  .Toastify__toast {
+    margin: 40px auto;
+    width: 280px;
+  }
 }

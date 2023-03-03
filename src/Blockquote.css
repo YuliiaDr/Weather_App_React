@@ -5,3 +5,8 @@
   font-weight: normal;
   text-align: center;
 }
+@media (max-width: 740px) {
+ .Blockquote{
+  font-size: 12px;
+ } 
+}

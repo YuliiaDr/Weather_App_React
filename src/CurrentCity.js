@@ -1,35 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { Triangle } from "react-loader-spinner";
+
 import "./CurrentCity.css";
 
-export default function CurrentCity({ weather, units, onUnitsChange }) {
-  console.log(weather, units);
+export default function CurrentCity(props) {
+
   const [temperature, setTemperature] = useState(null);
   const [feelsLikeTemperature, setFeelsLikeTemperature] = useState(null);
   const [feelsLikeUnits, setFeelsLikeUnits] = useState("C");
 
+  // ---------------------------------------------------Update Component State on Weather Props Change
   useEffect(() => {
-    if (weather) {
-      setTemperature(weather.temperature);
-      setFeelsLikeTemperature(weather.feels_like);
+    if (props.weather) {
+      setTemperature(props.weather.temperature);
+      setFeelsLikeTemperature(props.weather.feels_like);
     }
-  }, [weather]);
+  }, [props.weather]);
 
+  // ---------------------------------------------------Toggle Temp Unit between Celsius and Fahrenheit
   function handleUnitsClick(e, isImperial) {
     e.preventDefault();
-    if ((isImperial && units !== "imperial") || (!isImperial && units !== "metric")) {
+    if ((isImperial && props.units !== "imperial") || (!isImperial && props.units !== "metric")) {
       const newUnits = isImperial ? "imperial" : "metric";
-      const newTemperature = isImperial ? Math.round((temperature * 9) / 5 + 32) : weather.temperature;
-      const newFeelsLikeTemperature = isImperial ? Math.round((feelsLikeTemperature * 9) / 5 + 32) : weather.feels_like;
+      const newTemperature = isImperial ? Math.round((temperature * 9) / 5 + 32) : props.weather.temperature;
+      const newFeelsLikeTemperature = isImperial ? Math.round((feelsLikeTemperature * 9) / 5 + 32) : props.weather.feels_like;
       const newFeelsLikeUnits = isImperial ? "F" : "C";
       setTemperature(newTemperature);
       setFeelsLikeTemperature(newFeelsLikeTemperature);
       setFeelsLikeUnits(newFeelsLikeUnits);
-      onUnitsChange(newUnits);
+      props.onUnitsChange(newUnits);
     }
   }
 
-  if (temperature === null || feelsLikeTemperature === null || weather.city === undefined) {
+  // ---------------------------------------------------Return Part
+  if (temperature === null || feelsLikeTemperature === null || props.weather.city === undefined) {
     return (<Triangle
       height="100"
       width="100"
@@ -40,11 +44,10 @@ export default function CurrentCity({ weather, units, onUnitsChange }) {
       visible={true}
     />);
   }
-
   return (
     <div className="CurrentCity">
       <h2 className="City">
-        <span>{weather.city}</span>
+        <span>{props.weather.city}</span>
       </h2>
       <p className="CurrentTemp">
          <span className="CurrentTempNow float-left">
@@ -53,7 +56,7 @@ export default function CurrentCity({ weather, units, onUnitsChange }) {
         <span className="Units">
           <a
             href="/"
-            className={units === "metric" ? "Active" : ""}
+            className={props.units === "metric" ? "Active" : ""}
             onClick={(e) => handleUnitsClick(e, false)}
           >
             °C
@@ -61,7 +64,7 @@ export default function CurrentCity({ weather, units, onUnitsChange }) {
           |{" "}
           <a
             href="/"
-            className={units === "imperial" ? "Active" : ""}
+            className={props.units === "imperial" ? "Active" : ""}
             onClick={(e) => handleUnitsClick(e, true)}
           >
             °F

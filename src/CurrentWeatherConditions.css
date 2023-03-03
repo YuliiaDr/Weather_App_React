@@ -3,6 +3,20 @@
   text-align: left;
   margin-bottom: 0;
 }
+@media (max-width: 740px) {
+  .CurrentConditions{
+    padding-top: 30px;
+    font-size: 14px;
+    line-height: 1.5;
+  } 
+}
+@media (max-width: 360px) {
+  .CurrentConditions{
+    padding-top: 20px;
+    padding-bottom: 40px;
+    margin: 0 auto; 
+  } 
+}
 .CurrentConditions li:first-of-type:first-letter {
   text-transform: capitalize;
 }

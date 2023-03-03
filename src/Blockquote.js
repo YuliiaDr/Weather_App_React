@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+
 import "./Blockquote.css";
 
-export default function Blockquote({ weather }) {
+export default function Blockquote(props) {
   const [quote, setQuote] = useState("");
 
   useEffect(() => {
@@ -82,9 +83,8 @@ export default function Blockquote({ weather }) {
           setQuote(`“Above the cloud with its shadow is the star with its light.”`);
       }
     }
-
-    setQuoteByWeather(weather.icon_descr);
-  }, [weather]);
+    setQuoteByWeather(props.weather.icon_descr);
+  }, [props.weather]);
   return (
     <blockquote>
       <p className="Blockquote">

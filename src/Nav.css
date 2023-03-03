@@ -5,6 +5,11 @@
   padding: 30px 20px;
   text-align: center;
 }
+@media (max-width: 360px) {
+  .Nav{
+    padding-bottom: 0;
+  } 
+}
 .Nav .SearchForm {
   padding-top: 12px;
 }
