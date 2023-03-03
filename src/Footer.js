@@ -19,7 +19,7 @@ export default function Footer() {
         </a>{" "}
         and{" "}
         <a
-          href="https://app.netlify.com/sites/weatherapponline/overview"
+          href="https://weatherapp-react-dr.netlify.app/"
           className="SignatureLink"
         >
           hosted on Netlify
