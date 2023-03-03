@@ -17,7 +17,9 @@ export default function App() {
   const [isDaytime, setIsDaytime] = useState(true);
 
   const customId = "custom-id-yes";
-  let apiKey = "9422f0o3bf27abc2b46fcabt0cf2c5f3";
+  let apiKey= "bd79ao40tde3dec118ca46bc3e6dd55f";
+  // let apiKey = "9422f0o3bf27abc2b46fcabt0cf2c5f3";
+  
 
   // ---------------------------------------------------Changing Units
   function handleUnitsChange(newUnits) {
@@ -134,7 +136,7 @@ export default function App() {
   }
   useEffect(() => {
     getCurrentLocation();
-  });
+  }, []);
 
   // ---------------------------------------------------Return Part
   return (
