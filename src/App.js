@@ -134,7 +134,7 @@ export default function App() {
   }
   useEffect(() => {
     getCurrentLocation();
-  }, []);
+  });
 
   // ---------------------------------------------------Return Part
   return (

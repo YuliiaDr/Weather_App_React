@@ -11,8 +11,7 @@ export default function Footer() {
           Yuliia Demir
         </a>{" "}
         and is{" "}
-        <a
-          href="https://github.com/YuliiaDr/weather_app"
+        <a href="https://github.com/YuliiaDr/Weather_App_React"
           className="SignatureLink"
         >
           {" "}
