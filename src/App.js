@@ -139,11 +139,8 @@ export default function App() {
       }
     };
     getLocation();
-  }, [getCurrentLocation]);
-  
-  // useEffect(() => {
-  //   getCurrentLocation();
-  // }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // ---------------------------------------------------Return Part
   return (
