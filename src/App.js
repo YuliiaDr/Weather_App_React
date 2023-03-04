@@ -17,9 +17,8 @@ export default function App() {
   const [isDaytime, setIsDaytime] = useState(true);
 
   const customId = "custom-id-yes";
-  let apiKey= "bd79ao40tde3dec118ca46bc3e6dd55f";
-  // let apiKey = "9422f0o3bf27abc2b46fcabt0cf2c5f3";
-  
+  // let apiKey = "bd79ao40tde3dec118ca46bc3e6dd56f";
+  let apiKey = "9422f0o3bf27abc2b46fcabt0cf2c5f3";
 
   // ---------------------------------------------------Changing Units
   function handleUnitsChange(newUnits) {
@@ -32,7 +31,6 @@ export default function App() {
       });
     }
   }
-
   // ---------------------------------------------------Temperature Conversion
   function convertTemperature(temperature, oldUnits, newUnits) {
     if (oldUnits === "metric" && newUnits === "imperial") {
@@ -43,7 +41,6 @@ export default function App() {
       return temperature;
     }
   }
-
   // ---------------------------------------------------Set Background Color
   function setBackgroundColor(response) {
     const iconCondition = response.data.condition.icon;
@@ -53,7 +50,6 @@ export default function App() {
       setIsDaytime(false);
     }
   }
-
   useEffect(() => {
     document.body.className = isDaytime ? "day" : "night";
   }, [isDaytime]);
@@ -77,14 +73,12 @@ export default function App() {
     });
     setBackgroundColor(response);
   }
-
   // ---------------------------------------------------Search City
   function searchCity(query) {
     if (!query) {
       toast.error("Please, enter a city name", { toastId: customId, theme: "dark", transition: Flip });
       return;
     }
-    
     let url = `https://api.shecodes.io/weather/v1/current?query=${query}&key=${apiKey}&units=${units}&t=${new Date().getTime()}`;
     axios.get(url)
       .then((response) => {
@@ -136,7 +130,7 @@ export default function App() {
   }
   useEffect(() => {
     getCurrentLocation();
-  });
+  }, []);
 
   // ---------------------------------------------------Return Part
   return (
