@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import Header from "./Header";
 import Main from "./Main";
@@ -55,7 +55,7 @@ export default function App() {
   }, [isDaytime]);
 
   // ---------------------------------------------------Update Current Weather
-  function updateWeather(response) {
+  const updateWeather = useCallback((response) => {
     if (!timestamp) {
       setTimestamp(response.data.time);
     }
@@ -72,9 +72,10 @@ export default function App() {
   
     });
     setBackgroundColor(response);
-  }
+
+}, [timestamp]);
   // ---------------------------------------------------Search City
-  function searchCity(query) {
+  const searchCity = useCallback((query) => {
     if (!query) {
       toast.error("Please, enter a city name", { toastId: customId, theme: "dark", transition: Flip });
       return;
@@ -92,10 +93,10 @@ export default function App() {
         console.error(error);
         toast.error("An error occurred while getting weather data", { toastId: customId, theme: "dark", transition: Flip });
       });
-  }
+    }, [apiKey, units, updateWeather]);
   
   // ---------------------------------------------------Search of Current City Location
-  function getCurrentLocation() {
+  const getCurrentLocation = useCallback(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -116,21 +117,33 @@ export default function App() {
           });
         },
         () => {
-            toast.info("Geolocation is not supported by this browser 🌞", {
-              toastId: customId,
-              theme: "dark",
-              transition: Flip
-            })
+          toast.info("Geolocation is not supported by this browser 🌞", {
+            toastId: customId,
+            theme: "dark",
+            transition: Flip
+          })
           searchCity("Kyiv");
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
-  }
+  }, [apiKey, units, updateWeather, searchCity]);
+  
   useEffect(() => {
-    getCurrentLocation();
-  }, []);
+    const getLocation = async () => {
+      try {
+        await getCurrentLocation();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getLocation();
+  }, [getCurrentLocation]);
+  
+  // useEffect(() => {
+  //   getCurrentLocation();
+  // }, []);
 
   // ---------------------------------------------------Return Part
   return (
