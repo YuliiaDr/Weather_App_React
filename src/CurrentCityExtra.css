@@ -1,7 +1,7 @@
 .CurrentCityExtra {
   margin: 0 auto;
 }
-@media (max-width: 843px) {
+@media (max-width: 940px) {
   .CurrentCityExtra{
     border-top: 1px solid white;
   }

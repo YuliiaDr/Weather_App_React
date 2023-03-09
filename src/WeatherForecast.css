@@ -1,0 +1,59 @@
+.WeatherForecast .card-body {
+  text-align: center;
+}
+
+.WeatherForecast .card {
+  min-width: 100px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: transparent;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgb(0 0 0 / 30%);
+}
+
+@media (max-width: 1024px) {
+  .WeatherForecast .card{
+   max-width: 300px;
+  } 
+ }
+
+.WeatherForecast .card:hover,
+.WeatherForecast .card:focus {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.WeatherForecast .card-title {
+  font-size: 22px;
+}
+
+@media (max-width: 1024px) {
+  .WeatherForecast .card-title{
+   font-size: 16px;
+  } 
+ }
+
+.WeatherForecast .card-text {
+  font-size: 12px;
+}
+
+.WeatherForecast .card-img-top {
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .WeatherForecast .card-img-top{
+   max-width: 230px;
+  } 
+ }
+
+.WeatherForecast .card-text-date {
+  font-size: 18px;
+}
+
+.WeatherForecast .card-temp-max {
+  font-size: 16px;
+}

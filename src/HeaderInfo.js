@@ -3,8 +3,9 @@ import { Triangle } from "react-loader-spinner";
 
 import "./HeaderInfo.css";
 
-export default function HeaderInfo(props) {
-  const { time } = props;
+export default function HeaderInfo() {
+  const time = new Date();
+  console.log(time);
 
   // ---------------------------------------------------Setting Date
   const formatDate = (time) => {
@@ -22,19 +23,17 @@ export default function HeaderInfo(props) {
       "November",
       "December",
     ];
-    const date = new Date(time * 1000);
-    const day = date.getDate();
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
+    const day = time.getDate();
+    const month = months[time.getMonth()];
+    const year = time.getFullYear();
     const dateString = `${month}, ${day} ${year}`;
     return dateString;
   };
 
   // ---------------------------------------------------Setting Time
   const formatTime = (time) => {
-    const date = new Date(time * 1000);
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
     hours = hours < 10 ? "0" + hours : hours;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     const timeString = hours + ":" + minutes;

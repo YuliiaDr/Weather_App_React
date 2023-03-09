@@ -13,8 +13,8 @@ export default function App() {
   const [weather, setWeather] = useState(null);
   const [location, setLocation] = useState(null);
   const [units, setUnits] = useState("metric");
-  const [timestamp, setTimestamp] = useState(null);
   const [isDaytime, setIsDaytime] = useState(true);
+  const [forecast, setForecast] = useState(null);
 
   const customId = "custom-id-yes";
   // let apiKey = "bd79ao40tde3dec118ca46bc3e6dd56f";
@@ -31,6 +31,7 @@ export default function App() {
       });
     }
   }
+
   // ---------------------------------------------------Temperature Conversion
   function convertTemperature(temperature, oldUnits, newUnits) {
     if (oldUnits === "metric" && newUnits === "imperial") {
@@ -41,6 +42,7 @@ export default function App() {
       return temperature;
     }
   }
+
   // ---------------------------------------------------Set Background Color
   function setBackgroundColor(response) {
     const iconCondition = response.data.condition.icon;
@@ -54,11 +56,19 @@ export default function App() {
     document.body.className = isDaytime ? "day" : "night";
   }, [isDaytime]);
 
+  // ---------------------------------------------------Weather Forecast
+  function displayForecast(response) {
+    setForecast(response.data.daily.slice(1, 6));
+  }
+    
+  function getForecast(query) {
+    let apiKey = "9422f0o3bf27abc2b46fcabt0cf2c5f3";
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${query}&key=${apiKey}&units=${units}`;
+    axios.get(apiUrl).then(displayForecast);
+  }
+
   // ---------------------------------------------------Update Current Weather
   const updateWeather = useCallback((response) => {
-    if (!timestamp) {
-      setTimestamp(response.data.time);
-    }
     setWeather({
       city: response.data.city,
       temperature: Math.round(response.data.temperature.current),
@@ -69,11 +79,12 @@ export default function App() {
       icon_descr: response.data.condition.icon,
       feels_like: Math.round(response.data.temperature.feels_like),
       time: response.data.time
-  
     });
     setBackgroundColor(response);
+    getForecast(response.data.city);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
-}, [timestamp]);
   // ---------------------------------------------------Search City
   const searchCity = useCallback((query) => {
     if (!query) {
@@ -146,16 +157,17 @@ export default function App() {
   return (
     <div>
       <Header
-        time={timestamp ? timestamp : (weather && weather.time)} // use timestamp if available
         searchCity={searchCity}
         updateWeather={updateWeather}
         getCurrentLocation={getCurrentLocation}
+        getForecast={getForecast}
       />
       <Main
         weather={weather}
         units={units}
         onUnitsChange={handleUnitsChange} 
-        location={location} 
+        location={location}
+        forecast={forecast} 
       />
       <Footer />
       <ToastContainer position="top-center"/>

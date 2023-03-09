@@ -7,7 +7,9 @@
   justify-content: space-between;
 }
 .HeaderInfo h1{
-  margin-bottom: 10px;
+  margin-bottom: 0px;
+  font-size: 46px;
+  font-weight: 400;
 }
 @media (max-width: 740px) {
   .HeaderInfo h1{

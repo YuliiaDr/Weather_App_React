@@ -5,8 +5,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   color: white;
-  font-family: "Helvetica", sans-serif;
-  height: 100vh;
+  font-family: "Arial", sans-serif;
   padding: 40px;
 }
 body.day {
