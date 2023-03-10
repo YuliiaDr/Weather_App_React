@@ -62,7 +62,9 @@ export default function HeaderInfo() {
         <p>
           {formatDate(time)}
         </p>
-        <p>{formatTime(time)}</p>
+        <p>
+          {formatTime(time)}
+        </p>
       </div>
     </div>
   );

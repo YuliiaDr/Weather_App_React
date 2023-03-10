@@ -9,7 +9,7 @@ export default function Header(props) {
     <header>
       <div className="Header">
         <HeaderInfo/>
-        <Nav updateWeather={props.updateWeather} searchCity={props.searchCity} setCurrentWeather={props.setCurrentWeather} getCurrentLocation={props.getCurrentLocation} getForecast={props.getForecast}/>  
+        <Nav searchCity={props.searchCity}/>  
       </div>
     </header>
   );
