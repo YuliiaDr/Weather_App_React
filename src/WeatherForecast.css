@@ -29,9 +29,15 @@
   font-size: 22px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .WeatherForecast .card-title{
    font-size: 16px;
+  } 
+ }
+
+ @media (max-width: 575px) {
+  .WeatherForecast .card-title{
+   font-size: 20px;
   } 
  }
 
@@ -39,9 +45,25 @@
   font-size: 12px;
 }
 
+.WeatherForecast .card-text.card-text-date{
+  margin-bottom: 0;
+}
+@media (max-width: 1200px) {
+  .WeatherForecast .card-text.card-text-date{
+   font-size: 14px;
+  } 
+ }
+
+ @media (max-width: 575px) {
+  .WeatherForecast .card-text.card-text-date{
+   font-size: 16px;
+  } 
+ }
+
 .WeatherForecast .card-img-top {
   display: block;
   margin: 0 auto;
+  max-height: 200px;
 }
 
 @media (max-width: 1024px) {

@@ -7,28 +7,7 @@ import WeatherForecast from "./WeatherForecast";
 import "./Main.css";
 
 export default function Main(props) {
-  
-  // ---------------------------------------------------Return Part
-  // if (!props.weather) {
-  //   return (<main>
-  //   <section className="CurrentForecast">
-  //     <CurrentCity 
-  //       weather={props.weather}
-  //       units={props.units}
-  //       onUnitsChange={props.onUnitsChange}
-  //     />
-  //     <CurrentImage weather={props.weather}/>
-  //     <CurrentCityExtra
-  //       weather={props.weather}
-  //       units={props.units}
-  //       onUnitsChange={props.onUnitsChange}
-  //     />
-  //   </section>
-  //   <WeatherForecast
-  //     forecast={props.forecast}
-  //   />
-  // </main>);
-  // }
+
   return (
     <main>
       <section className="CurrentForecast">
@@ -41,14 +20,11 @@ export default function Main(props) {
         <CurrentCityExtra
           weather={props.weather}
           units={props.units}
-          onUnitsChange={props.onUnitsChange}
         />
       </section>
       <WeatherForecast
         units={props.units}
-        onUnitsChange={props.onUnitsChange}
-        location={props.location}
-        forecast={props.forecast}
+        weather={props.weather}
         />
     </main>
   );

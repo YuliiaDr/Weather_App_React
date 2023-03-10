@@ -1,22 +1,37 @@
-import React from "react";
+import React , {useState, useEffect} from "react";
+import axios from "axios";
+import { Triangle } from "react-loader-spinner";
 import "./WeatherForecast.css";
 
 export default function WeatherForecast(props) {
-  console.log(props.units);
-  if (!props.forecast) {
-    return null;
-  }
-  let currentDate = new Date();
+  console.log(props);
 
-  // ------------------------------Forecast Temperature Conversion
-  function convertTemperature(temperature, oldUnits, newUnits) {
-    if (oldUnits === "metric" && newUnits === "imperial") {
-      return Math.round((temperature * 9) / 5 + 32);
-    } else if (oldUnits === "imperial" && newUnits === "metric") {
-      return Math.round(((temperature - 32) * 5) / 9);
-    } else {
-      return temperature;
+  let currentDate = new Date();
+  const [forecast, setForecast] = useState(null);
+
+// ---------------------------------------------------Getting Weather Forecast
+  useEffect(() => {
+    if (props.weather) {
+      let apiKey = "9422f0o3bf27abc2b46fcabt0cf2c5f3";
+      let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${props.weather.city}&key=${apiKey}&units=${props.units}`;
+      axios.get(apiUrl).then((response) => {
+        setForecast(response.data.daily.slice(1, 6));
+      });
     }
+  }, [props.weather, props.units]);
+
+  if (!props.weather || !forecast) {
+    return (
+      <Triangle
+        height="100"
+        width="100"
+        color="#26C9FC"
+        ariaLabel="triangle-loading"
+        wrapperStyle={{}}
+        wrapperClassName=""
+        visible={true}
+      />
+    );
   }
 
   // ------------------------------Forecast Timestamp
@@ -41,7 +56,7 @@ export default function WeatherForecast(props) {
   return (
     <div className="WeatherForecast">
       <div className="row row-cols-1 row-cols-sm-5 g-5">
-        {props.forecast.map((forecastDay, index) => (
+        {forecast.map((forecastDay, index) => (
           <div key={index} className="col">
             <div className="card">
               <div className="card-body">
@@ -53,9 +68,9 @@ export default function WeatherForecast(props) {
                   className="card-img-top"
                 />
                 <p className="card-text card-text-temp">
-                  <span className="card-temp-max">{Math.round(convertTemperature(forecastDay.temperature.maximum, "metric", props.units))}°</span>
+                  <span className="card-temp-max">{Math.round(forecastDay.temperature.maximum, "metric", props.units)}°</span>
                   {" "}
-                  <span className="card-temp-min">{Math.round(convertTemperature(forecastDay.temperature.minimum, "metric", props.units))}°</span>
+                  <span className="card-temp-min">{Math.round(forecastDay.temperature.minimum, "metric", props.units)}°</span>
                 </p>
               </div>
             </div>

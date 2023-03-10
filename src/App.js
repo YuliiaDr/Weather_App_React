@@ -14,7 +14,6 @@ export default function App() {
   const [location, setLocation] = useState(null);
   const [units, setUnits] = useState("metric");
   const [isDaytime, setIsDaytime] = useState(true);
-  const [forecast, setForecast] = useState(null);
 
   const customId = "custom-id-yes";
   // let apiKey = "bd79ao40tde3dec118ca46bc3e6dd56f";
@@ -56,17 +55,6 @@ export default function App() {
     document.body.className = isDaytime ? "day" : "night";
   }, [isDaytime]);
 
-  // ---------------------------------------------------Weather Forecast
-  function displayForecast(response) {
-    setForecast(response.data.daily.slice(1, 6));
-  }
-    
-  function getForecast(query) {
-    let apiKey = "9422f0o3bf27abc2b46fcabt0cf2c5f3";
-    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${query}&key=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(displayForecast);
-  }
-
   // ---------------------------------------------------Update Current Weather
   const updateWeather = useCallback((response) => {
     setWeather({
@@ -81,7 +69,7 @@ export default function App() {
       time: response.data.time
     });
     setBackgroundColor(response);
-    getForecast(response.data.city);
+    // getForecast(response.data.city);
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
@@ -160,14 +148,12 @@ export default function App() {
         searchCity={searchCity}
         updateWeather={updateWeather}
         getCurrentLocation={getCurrentLocation}
-        getForecast={getForecast}
       />
       <Main
         weather={weather}
         units={units}
         onUnitsChange={handleUnitsChange} 
         location={location}
-        forecast={forecast} 
       />
       <Footer />
       <ToastContainer position="top-center"/>
