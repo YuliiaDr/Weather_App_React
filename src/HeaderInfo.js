@@ -5,7 +5,6 @@ import "./HeaderInfo.css";
 
 export default function HeaderInfo() {
   const time = new Date();
-  console.log(time);
 
   // ---------------------------------------------------Setting Date
   const formatDate = (time) => {

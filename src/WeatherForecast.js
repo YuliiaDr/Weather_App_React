@@ -1,10 +1,8 @@
 import React , {useState, useEffect} from "react";
 import axios from "axios";
-import { Triangle } from "react-loader-spinner";
 import "./WeatherForecast.css";
 
 export default function WeatherForecast(props) {
-  console.log(props);
 
   let currentDate = new Date();
   const [forecast, setForecast] = useState(null);
@@ -21,17 +19,7 @@ export default function WeatherForecast(props) {
   }, [props.weather, props.units]);
 
   if (!props.weather || !forecast) {
-    return (
-      <Triangle
-        height="100"
-        width="100"
-        color="#26C9FC"
-        ariaLabel="triangle-loading"
-        wrapperStyle={{}}
-        wrapperClassName=""
-        visible={true}
-      />
-    );
+    return null;
   }
 
   // ------------------------------Forecast Timestamp

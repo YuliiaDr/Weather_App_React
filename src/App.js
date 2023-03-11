@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
 import Header from "./Header";
 import Main from "./Main";
@@ -32,25 +32,24 @@ export default function App() {
   }
 
   // ---------------------------------------------------Temperature Conversion
-  function convertTemperature(temperature, oldUnits, newUnits) {
-    if (oldUnits === "metric" && newUnits === "imperial") {
-      return Math.round((temperature * 9) / 5 + 32);
-    } else if (oldUnits === "imperial" && newUnits === "metric") {
-      return Math.round(((temperature - 32) * 5) / 9);
-    } else {
-      return temperature;
-    }
-  }
+  const convertTemperature = useMemo(() => {
+    return function(temperature, oldUnits, newUnits) {
+      if (oldUnits === "metric" && newUnits === "imperial") {
+        return Math.round((temperature * 9) / 5 + 32);
+      } else if (oldUnits === "imperial" && newUnits === "metric") {
+        return Math.round(((temperature - 32) * 5) / 9);
+      } else {
+        return temperature;
+      }
+    };
+  }, []);
 
   // ---------------------------------------------------Set Background Color
-  function setBackgroundColor(response) {
+  const setBackgroundColor = useCallback((response) => {
     const iconCondition = response.data.condition.icon;
-    if (iconCondition.includes("day")) {
-      setIsDaytime(true);
-    } else {
-      setIsDaytime(false);
-    }
-  }
+    setIsDaytime(iconCondition.includes("day"));
+  }, []);
+  
   useEffect(() => {
     document.body.className = isDaytime ? "day" : "night";
   }, [isDaytime]);
@@ -69,7 +68,6 @@ export default function App() {
       time: response.data.time
     });
     setBackgroundColor(response);
-    // getForecast(response.data.city);
     // eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
